@@ -1,0 +1,469 @@
+/* ========================================================================= */
+/* BASE.CSS - GLOBAL STYLES, LAYOUT, CORE COMPONENTS, AND UTILITIES          */
+/* ========================================================================= */
+
+/* === CSS Reset & Global Box Model === */
+/* Reset margins, paddings, and set full width/max-width for all elements */
+html, body {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrollbar on all pages */
+  background-color: #f4f0f0; /* Default light mode background color */
+}
+
+/* Ensure all elements use the border-box model for easier sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* === Layout Containers & Flow === */
+/* Ensure primary layout blocks don't exceed window width and prevent overflow */
+header, main, footer, .container, .hero-header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw; /* Always match viewport width */
+}
+
+.container, .hero-header, header, main, section {
+  max-width: 100%;   /* Never wider than window */
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* For image containers, ensure they respect viewport width */
+.container, .hero-header, .home-gallery, .wrapper-images {
+  max-width: 100vw; /* never wider than the screen */
+  overflow-x: hidden;
+}
+
+/* === Scrollbar Fix for Layout Shifting === */
+/* Force reserve space for scrollbar to prevent layout shift between pages */
+html {
+  overflow-y: scroll;        /* force reserve space */
+  scrollbar-gutter: stable;  /* prevent shifting */
+}
+
+/* Hide scrollbar visually (Chrome, Edge, Safari) */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar visually (Firefox) */
+html {
+  scrollbar-width: none;
+}
+
+/* === Global Page Styling === */
+/* Light mode persistent background image (Nepal.png) */
+body:not(.dark-mode)::before{
+  content:""; position: fixed; inset: 0;
+  background: url("images/Nepal.png") no-repeat center center;
+  background-size: 420px auto;
+  pointer-events: none; z-index: -1;
+}
+
+/* Common page title styling */
+.page-title { text-align: center; margin: 30px 0; font-size: 2rem; color: silver; }
+
+/* Generic card grid layout (for repeatable content) */
+.card-container {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px; padding: 20px;
+}
+
+/* === Hero Header Section === */
+.hero-header {
+  position: relative;
+  /* Background image set here for all modes, Parallax/Dark mode effects are in theme-effects.css */
+  background: url("images/kumari.jpg") no-repeat center center / cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Hero overlay only in light mode (slight dimming) */
+body:not(.dark-mode) .hero-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15); /* slight dim */
+  z-index: 0;
+}
+
+/* No overlay in dark mode (components.css content moved here for coherence) */
+body.dark-mode .hero-header::after {
+  content: none;
+}
+
+/* === Home Page Specific Layout Adjustments === */
+/* Remove vertical space above the container on the home page */
+.home-page .container { 
+  margin-top: 0 !important;
+}
+
+/* Force Home page to be full viewport height and hide potential vertical scroll */
+.home-page {
+  height: 100vh;
+  /* overflow-y: auto; Hides the right-side scroll bar if content fits */
+  /* scrollbar-width: none; */
+  
+}
+.home-page::-webkit-scrollbar{
+  display: none;
+}
+
+/* Ensure the hero section is full screen on the home page */
+.home-page .hero-header {
+  min-height: 100vh;
+}
+
+/* === NAVIGATION COMPONENT (Nav Bar) === */
+.nav {
+  position: absolute; /* Default placement */
+  top: 0;
+  width: 100%; /* Must be full width */
+  background: rgba(225, 225, 225, 0.9); /* Light mode background */
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(236, 214, 214, 0.858);
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 18px;
+  color: inherit;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Navigation link underline base style */
+.nav a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #ff497c;
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for navigation links */
+.nav a:hover::before {
+  transform: scaleX(1);
+}
+
+/* Active page link underline */
+.nav a.active::before {
+  transform: scaleX(1);
+}
+
+/* Fix nav shifting: Make the nav sticky and place socials on the right */
+.nav { position: absolute; } 
+.nav .socials {
+  position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  z-index: 100;
+}
+
+/* === Social Icon Row (shared between nav and footer) === */
+.socials {
+  display: flex; gap: 14px; align-items: center;
+}
+.socials a {
+  width: 28px; height: 28px; display: inline-grid; place-items: center;
+  border-radius: 999px; background: rgba(0,0,0,0.06);
+  transition: transform .2s ease, filter .2s ease, background .2s ease;
+  outline: none;
+}
+.socials a svg { width: 18px; height: 18px; fill: currentColor; }
+.socials a:hover { transform: translateY(-2px) scale(1.06); background: rgba(0,0,0,0.10); }
+
+/* Brand color glows on hover */
+.socials a[data-brand="instagram"]:hover { color: #E1306C; filter: drop-shadow(0 0 10px rgba(225,48,108,.55)); }
+.socials a[data-brand="youtube"]:hover   { color: #FF0000; filter: drop-shadow(0 0 10px rgba(255,0,0,.55)); }
+.socials a[data-brand="facebook"]:hover  { color: #1877F2; filter: drop-shadow(0 0 10px rgba(24,119,242,.55)); }
+.socials a[data-brand="tiktok"]:hover    { color: #00F2EA; filter: drop-shadow(0 0 10px rgba(0,242,234,.55)); }
+
+
+/* === Footer Styling === */
+.site-footer {
+  margin-top: 40px; padding: 28px 16px 40px;
+  display: grid; place-items: center; text-align: center;
+  color: #666;
+}
+.site-footer .socials a { background: rgba(0,0,0,0.05); }
+
+
+/* === Theme Toggle Button === */
+#toggle-theme {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  border: none;
+  background: #ff497c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  z-index: 101;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+#toggle-theme:hover {
+  background: #e23b6a;
+}
+
+/* === Festival Magical Cards: Wrapper & Base Layout === */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+
+.container .box {
+  position: relative;
+  width: 320px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 30px;
+  transition: 0.5s;
+}
+
+/* Glassy content panel base style */
+.container .box .content {
+  position: relative;
+  left: 0;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1;
+  color: #fff;
+  transition: 0.5s;
+}
+
+/* Content panel hover effect */
+.container .box:hover .content {
+  left: -25px;
+  padding: 60px 40px;
+}
+
+/* Content Headings and text */
+.container .box .content h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+.container .box .content p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  line-height: 1.4em;
+}
+
+/* Festival image inside content */
+.container .box .content img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+/* Buttons */
+.container .box .content a {
+  display: inline-block;
+  font-size: 1.1em;
+  color: #111;
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: 5px;
+}
+.container .box .content a:hover {
+  background: #ffcf4d;
+  border: 1px solid rgba(255, 0, 88, 0.4);
+  box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
+}
+
+/* === NZ Map Section Layout (Places to Go) === */
+.nz-map-section {
+  display: block;
+  padding: 1rem 0 2rem;
+}
+
+.nz-map {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 0 2rem;
+}
+
+.nz-map svg {
+  flex: 0 0 33%;
+  height: auto;
+  display: inline-block;
+  max-width: 560px;
+  min-width: 320px;
+}
+
+/* Description panel base style */
+.nz-map #description {
+  flex: 1 1 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  margin-top: 1rem;
+  transition: .8s cubic-bezier(.14, .39, .41, 1.29);
+}
+
+.nz-map #description * { opacity: 0; }
+.nz-map #description p { margin-bottom: 2rem; }
+.nz-map #description.active * { animation: nzmap-fadein 3s forwards; }
+.nz-map #description.active img { animation-delay: .4s; }
+.nz-map #description.active h1 { animation-delay: 1s; }
+.nz-map #description.active p { animation-delay: 2s; }
+.nz-map #description h1,
+.nz-map #description p { margin-left: 2rem; margin-right: 2rem; }
+.nz-map #description img { width: 100%; }
+
+@keyframes nzmap-fadein { to { opacity: 1; } }
+
+/* Map SVG text and circle styles */
+.nz-map text {
+  font-family: Libertad, sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  fill: #fff;
+}
+
+.nz-map circle { fill: #000; }
+
+.nz-map circle.outline {
+  fill: none;
+  stroke-width: 5px;
+  stroke: #fff;
+  transition: .4s;
+  animation: nzmap-lookit 1.8s infinite alternate cubic-bezier(.85, 0, .32, .83);
+}
+
+.nz-map a:hover circle:not(.outline),
+.nz-map a:focus circle { fill: #f00; }
+
+@keyframes nzmap-lookit {
+  to { stroke-width: 20px; stroke: rgba(255, 255, 255, 0.2); }
+}
+
+/* Animated travel paths (initial state) */
+#ni, #si {
+  fill: none;
+  stroke: #f00;
+  stroke-width: 12px;
+  transition: .4s opacity;
+}
+#ni { stroke-dasharray: 240; stroke-dashoffset: 240; } /* North Island path */
+#si { stroke-dasharray: 1250; stroke-dashoffset: 1250; } /* South Island path */
+
+/* Responsive: Hide map and stack descriptions on small screens */
+@media (max-width: 790px) {
+  #nzmap { display: none; }
+  .nz-map { display: block; margin: 0; }
+  .nz-map #description {
+    width: 100%;
+    margin: 0;
+  }
+  .nz-map #description * { opacity: 1; }
+  .nz-map #description > div { flex: 1; }
+}
+.desc{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -600px;
+}
+.desc1{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -200px;
+}
+.desc2{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+.khola{
+  width: 300px;
+  height: 500px;
+  border-radius: 30px 0px 0px 30px;
+  background-size: cover;
+  background-position: center;
+}
+.box1{
+  /* background-image:url("images/khola.jpg"); */
+
+  display: flex;
+  max-width: 800px;
+  max-height: 700px;
+  width: 800px;
+  height: 500px;
+  /* border: 1px solid black; */
+  background-color: #cdc9c9;
+  box-shadow: 2px 2px 2px 2px  #868585;
+  border-radius: 30px;
+  
+  
+}
+.TOP{
+  text-decoration-thickness: bold;
+}
+.explan{
+  margin-left: 10px;
+}
+.vid video{
+  position: relative;
+  align-items: center;
+  display: inline;
+  margin-top: 200px;
+  border-radius: 20px;
+  display: block;
+}
+.vid_pos{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  
+  margin-top: 50px;
+  max-height: 700px;
+  max-width: 1000px;
+  width: 1000px;
+  height: 800px;
+  background-color: #7d7373;
+}
+.vid_pos::-webkit-scrollbar{
+  display: none;
+}

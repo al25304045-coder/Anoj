@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cool Culture Gallery</title>
+
+    <link rel="stylesheet" href="base.css">
+
+    <link rel="stylesheet" href="theme-effects.css">
+
+</head>
+
+<body class="home-page">
+
+  <div id="page-veil" class="page-veil" aria-hidden="true"></div>
+  <button id="toggle-theme">Toggle Dark/Light Mode</button>
+  <!-- ...rest of the page... -->
+
+<!-- Navigation (same structure you already use) -->
+ <nav class="nav">
+    <ul>
+      <li><a class="active" href="Home.html">Home</a></li>
+      <li><a href="Festivals.html">Festivals</a></li>
+      <li><a href="Ethnic groups.html">Ethnic groups</a></li>
+      <li><a href="Places to go.html">Places to go</a></li>
+      <li><a href="Myth.html">Myth</a></li>
+    </ul>
+
+
+    <!-- Socials (unchanged) -->
+    <div class="socials" aria-label="Social media">
+        <a href="#" target="_blank" rel="noopener" aria-label="Instagram" data-brand="instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener" aria-label="YouTube" data-brand="youtube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.1 3.1 0 0 0-2.2-2.2C19.2 3.5 12 3.5 12 3.5s-7.2 0-9.3.5A3.1 3.1 0 0 0 .5 6.2 32.6 32.6 0 0 0 0 12a32.6 32.6 0 0 0 .5 5.8 3.1 3.1 0 0 0 2.2 2.2c2.1.5 9.3.5 9.3.5s7.2 0 9.3-.5a3.1 3.1 0 0 0 2.2-2.2A32.6 32.6 0 0 0 24 12a32.6 32.6 0 0 0-.5-5.8zM9.75 15.5v-7L16 12l-6.25 3.5z"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener" aria-label="Facebook" data-brand="facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 22v-8h3l1-4h-4V7.5A1.5 1.5 0 0 1 14.5 6H17V2h-3.5A5.5 5.5 0 0 0 8 7.5V10H5v4h3v8h5z"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener" aria-label="TikTok" data-brand="tiktok" title="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 3.5a5.5 5.5 0 0 0 4 1.8v3a8.4 8.4 0 0 1-4-1.1v6.9a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3a3.1 3.1 0 1 0 2.2 2.9V2h3z"/></svg>
+        </a>
+    </div>
+</nav>
+
+<header class="hero-header">
+
+<div class = "container">
+  <h1>Hi, 
+    Welcome To</h1>
+  <h1>Nepal.</h1>
+</div>
+ 
+</header>
+<!-- this area is for the video -->
+ <section class="vid_pos">
+
+   <div class="vid">
+     <video height="600px" width="800px" autoplay loop muted>
+       >
+       <source src="Nepal In 4K - Country Of The Highest Mountain In The World _ Scenic Relaxati_4K.mp4" type="video/mp4" >
+      </video>
+    </div>
+  </section>
+
+<div id="lb" class="lightbox">
+  <figure>
+    <img id="lb-img" alt="Lightbox Image">
+    <figcaption id="lb-caption"></figcaption>
+    <div class="lb-controls">
+      <button id="lb-prev" aria-label="Previous Image">❮</button>
+      <button id="lb-next" aria-label="Next Image">❯</button>
+      <button id="lb-close" aria-label="Close Lightbox">✕</button>
+    </div>
+  </figure>
+</div>
+<script src="bloody-night.js"></script>
+<script src="page-transitions.js"></script>
+</body>
+</html>
